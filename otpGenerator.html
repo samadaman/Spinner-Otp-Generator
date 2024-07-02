@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTP Generator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    #otp-display {
+        font-size: 24px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    #phone-input {
+        font-size: 18px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    #generate-btn {
+        font-size: 18px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<input type="tel" id="phone-input" placeholder="Enter phone number">
+<div id="otp-display">OTP will appear here</div>
+<button id="generate-btn">Generate OTP</button>
+
+<script>
+    function generateOTP() {
+        // Generate a random 4-digit OTP
+        return Math.floor(1000 + Math.random() * 9000);
+    }
+
+    function sendNotification(phoneNumber, otp) {
+        // Simulate sending notification by displaying an alert
+        alert(`Notification sent to ${phoneNumber}: Your OTP is ${otp}`);
+    }
+
+    document.getElementById('generate-btn').addEventListener('click', function() {
+        const phoneInput = document.getElementById('phone-input');
+        const otpDisplay = document.getElementById('otp-display');
+        const phoneNumber = phoneInput.value.trim();
+
+        // Check if phone number is valid (simple validation)
+        if (/^\d{10}$/.test(phoneNumber)) {
+            const otp = generateOTP();
+            otpDisplay.textContent = `OTP sent to ${phoneNumber}`;
+            sendNotification(phoneNumber, otp);
+        } else {
+            alert("Please enter a valid 10-digit phone number.");
+        }
+    });
+
+    // Real-time OTP generation based on phone number input
+    document.getElementById('phone-input').addEventListener('input', function() {
+        const otpDisplay = document.getElementById('otp-display');
+        otpDisplay.textContent = "OTP will appear here";
+    });
+</script>
+</body>
+</html>
